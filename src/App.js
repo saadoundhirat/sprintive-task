@@ -1,10 +1,14 @@
 import "./App.css";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 
 function App() {
+  const KEY = `${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`;
+  console.log(KEY);
   return (
-    <div className="App">
-      <div className="container">inside app container application</div>
-    </div>
+    <Container maxWidth="lg">
+      <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }} />
+    </Container>
   );
 }
 
