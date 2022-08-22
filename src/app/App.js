@@ -5,15 +5,15 @@ import Header from "./components/header/Header";
 import MasonryImageList from "./components/masonry-image-list/MasonryImageList";
 import useFetch from "./hooks/useFetch";
 import SnackbarMessage from "./components/snackbar/SnackbarMessage";
-
-// Yl9KaLAhCpFk6nZMVBENhRQKsk1jbFczlbdCrI9zE1I
+import CircularProgress from "@mui/material/CircularProgress";
+import ScrollDialog from "./components/dialog/Dialog";
 
 function App() {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const triggerRef = useRef(null);
   const { loading, error, list } = useFetch(page);
-
-  console.log('error', error);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedImg, setSelectedImg] = useState({});
 
   const handleObserver = useCallback((entries) => {
     const target = entries[0];
@@ -29,14 +29,16 @@ function App() {
       threshold: 0,
     };
     const observer = new IntersectionObserver(handleObserver, option);
-    if (triggerRef.current) observer.observe(triggerRef.current);
+    if (triggerRef.current) {
+      observer.observe(triggerRef.current);
+    }
   }, [handleObserver]);
 
   return (
     <Box sx={{ width: "100%", display: "flex", flexDirection: "column" }}>
       <Header />
 
-      {error && <SnackbarMessage open message={error} variant='error' />}
+      {error && <SnackbarMessage open message={error} variant="error" />}
       <Box
         sx={{
           display: "flex",
@@ -46,9 +48,22 @@ function App() {
           height: "auto",
         }}
       >
-        <MasonryImageList list={list} loading={loading} />
+        <MasonryImageList
+          list={list}
+          setDialogOpen={setDialogOpen}
+          setSelectedImg={setSelectedImg}
+        />
+        {dialogOpen && (
+          <ScrollDialog
+            open={dialogOpen}
+            onClose={setDialogOpen}
+            list={list}
+            selectedImg={selectedImg}
+          />
+        )}
       </Box>
-      <Box ref={triggerRef} />
+      {loading && <CircularProgress color="primary" />}
+      <Box ref={triggerRef} sx={{ display: loading ? "none" : "block" }} />
     </Box>
   );
 }

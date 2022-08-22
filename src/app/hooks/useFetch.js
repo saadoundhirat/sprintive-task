@@ -11,28 +11,10 @@ function useFetch(page) {
     try {
       await setLoading(true);
       await setError(null);
-
       const res = await axios.get(
-        `https://api.unsplash.com/photos?client_id=Yl9KaLAhCpFk6nZMVBENhRQKsk1jbFczlbdCrI9zE1I&page=${page}&per_page=8`
+        `https://api.unsplash.com/photos?client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&page=${page}&per_page=8`
       );
-      console.log(res.data);
-      const newPhotos = await res.data.map((pho) => {
-        return {
-          id: pho.id,
-          url: pho.urls.regular,
-          description: pho.description,
-          width: pho.width,
-          height: pho.height,
-          links: { ...pho.links },
-          likes: pho.likes,
-          views: pho.views,
-          downloads: pho.downloads,
-          user: {
-            displayName: `${pho.user.first_name} ${pho.user.last_name}`,
-          },
-        };
-      });
-      await setList((prev) => _.unionBy(prev, newPhotos, "id"));
+      await setList((prev) => _.unionBy(prev, res.data, "id"));
       await setLoading(false);
     } catch (err) {
       await setLoading(false);
@@ -44,6 +26,7 @@ function useFetch(page) {
     sendQuery(page);
   }, [sendQuery, page]);
 
+  console.log("image list", list);
   return { loading, error, list };
 }
 
