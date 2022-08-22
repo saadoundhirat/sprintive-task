@@ -3,8 +3,7 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
-  background-color: rgb(244, 244, 244);
-  color: #555;
+  color: "#333";
 }
 
 * :focus {
@@ -12,18 +11,17 @@
 }
 
 html {
-  font-size: 62.5%;
   font-family: "Inter var", Roboto, Helvetica Neue, Arial, sans-serif;
-  background-color: rgb(244, 244, 244);
   width: 100%;
   height: 100%;
 }
 
 body {
-  font-size: 14px;
+  font-size: 62.5%;
   line-height: 1.4;
   overflow-x: hidden;
   font-feature-settings: "salt";
+  background-color: rgb(244, 244, 244);
 }
 
 html,
