@@ -5,7 +5,7 @@
 
 ## Note
 
-* I have added some rubish in one list inside the photo dialog.
+* I have added some rubbish in one list inside the photo dialog.
 * Really sorry for the late I was busy in my current work.
 
 ## Contact me

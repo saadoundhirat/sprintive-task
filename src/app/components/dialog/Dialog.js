@@ -208,7 +208,7 @@ export default function ScrollDialog({ open, onClose, list, selectedImg }) {
             sx={{
               display: "flex",
               flex: 1,
-              flexDirection: "row",
+              flexDirection: { md: "row", sm: "column" },
               alignItems: "start",
               justifyContent: "space-between",
               width: "100%",

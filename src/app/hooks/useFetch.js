@@ -26,7 +26,6 @@ function useFetch(page) {
     sendQuery(page);
   }, [sendQuery, page]);
 
-  console.log("image list", list);
   return { loading, error, list };
 }
 
